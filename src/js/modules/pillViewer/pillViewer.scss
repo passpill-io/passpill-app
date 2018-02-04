@@ -1,0 +1,187 @@
+.pillViewer {
+	position: relative;
+	max-width: 800px;
+	margin: $hmargin auto 0;
+	padding-top: 1px;
+
+	&.editPass {
+		.pwSelector {
+			position: absolute;
+			top: 0; left: 0;
+			z-index: 1;
+			opacity: 0;
+			transform: translateX(-200px);
+		}
+		.pwEdit {
+			position: relative;
+			z-index: 2;
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+}
+
+.pwSelector {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	transition: opacity .3s, transform .3s;
+	width: 100%;
+}
+
+.pwSidebar {
+	width: 270px;
+	margin-right: $hmargin;
+	padding-right: $hmargin;
+	border-right: 1px solid #a4bcc3;
+}
+
+.pwContent {
+	flex-grow: 1;
+}
+
+.pwEdit {
+	position: absolute;
+	width: 100%;
+	top: 0; left: 0;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity .3s, transform .3s;
+	transform: translateX(200px);
+}
+
+
+.peBody {
+	padding: $hmargin;
+	background: #f0f3f4;
+}
+
+.peName {
+	margin-bottom: $hmargin;
+}
+
+
+
+.peFields {
+	padding: 0;
+	margin-left: 100px;
+}
+
+h4.peFieldsTitle {
+	margin-bottom: 10px;
+}
+
+.passFieldEdit {
+	background: #fafafb;
+}
+
+.pfeName {
+	margin-bottom: 10px;
+}
+
+.pfeValue {
+	margin-bottom: 10px;
+
+	textarea {
+		height: 36px;
+		min-height: auto;
+		resize: none;
+	}
+
+	input {
+		width: 100%;
+	}
+}
+
+.pfeControls {
+	text-align: right;
+	font-size: .9em;
+}
+
+.peFieldAdder {
+	border: 3px dashed #ccc;
+	color: #ccc;
+	padding: 50px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 1.2em;
+	background: none;
+	width: 100%;
+	text-shadow: none;
+	box-shadow: none;
+
+	&:hover {
+		border-color: $color;
+		color: $color;
+		background: $color-back-3;
+		box-shadow: none;
+	}
+}
+
+.pass {
+	background: $color-back-2;
+	cursor: pointer;
+	position: relative;
+
+	&:hover {
+		background: #fff;
+		.passControls {
+			visibility: visible;;
+		}
+	}
+}
+
+.passName {
+	font-size: 1.1em;
+	margin-bottom: 10px;
+}
+
+.passFields {
+	font-size: .8em;
+
+	.passField {
+		margin-bottom: 5px;
+	}
+
+	.passFieldName {
+		opacity: .6;
+	}
+
+	.passCopyField .passFieldValue {
+		cursor: pointer;
+		display: inline-block;
+		padding: 1px 5px;
+
+		i {
+			margin-left: 5px;
+			display: none;
+		}
+
+		&:hover {
+			background: $color;
+			color: #fff;
+			border-radius: 5px;
+
+			i {
+				display: inline-block;
+			}
+		}
+	}
+
+	.passUrlField {
+		i {
+			opacity: .5;
+		}
+	}
+}
+
+.passControls {
+	position: absolute;
+  top: 50%;
+  right: 30px;
+  /* height: 100%; */
+  /* line-height: 100%; */
+  transform: translateY(-50%);
+  color: #ccc;
+	visibility: hidden;
+}

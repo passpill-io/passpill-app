@@ -1,0 +1,62 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+	/* e1e6e8 */
+	height: 100vh;
+
+	background: #dfe6e8;
+	background:url('/img/circuit.png'), linear-gradient(to bottom, #dfe6e8 0%, #dfe6e8 70%, #c6dae2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e6e8', endColorstr='#bad5e0', GradientType=0 );
+
+	background-attachment: fixed;
+	color: #353c3e;
+	font-size: 18px;
+
+	font-family: 'Oxygen', sans-serif;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Raleway', sans-serif;
+}
+
+h1 { font-size: 3em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.6em; }
+h4 { font-size: 1.3em; }
+
+a {
+	cursor: pointer;
+  color: $color-link;
+
+	a:hover {
+		color: $color-link-hover;
+	}
+}
+
+.appHeader {
+	background: #353c3e;
+	color: #eee;
+	padding: 1px;
+
+	h1 {
+		width: 90px; height: 40px;
+		margin: 0;
+		background: url('/img/pplogo.png') 0 0 no-repeat;
+		background-size: auto 100%;
+		text-indent: -5000px;
+		margin: 5px 10px;
+	}
+
+	a {
+		color: #eee;
+	}
+
+	nav {
+		float: right;
+	}
+}
