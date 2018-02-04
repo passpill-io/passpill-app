@@ -2,6 +2,9 @@ import { render } from 'preact';
 import '../scss/all.scss';
 import 'state/reactions';
 
+if( location.host.indexOf('passpill.io') !== -1 && location.search.indexOf('dev') === -1 ){
+	return (document.body.innerHTML = 'Coming soon');
+}
 
 function init() {
 	let elem = document.getElementById('root'),
