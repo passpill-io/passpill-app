@@ -47,6 +47,7 @@ Temporary Items
 bower_components/
 node_modules/
 public/
+dist/
 rev-manifest.json
 *.zip
 npm-debug.log
