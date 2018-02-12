@@ -1,5 +1,7 @@
 const prefix = 'pp_';
 
+var LS = {};
+
 LS.get = function (key) {
 	try {
 		return JSON.parse(localStorage.getItem(prefix + key));
@@ -35,5 +37,4 @@ LS.pop = function (key) {
 	return value;
 };
 
-Object.freeze(LS);
 export default LS;

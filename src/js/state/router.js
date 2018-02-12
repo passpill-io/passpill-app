@@ -3,12 +3,16 @@ import hashStrategy from 'utils/hashStrategy';
 
 import Login from 'modules/auth/Login';
 import Register from 'modules/auth/Register';
+import Settings from 'modules/settings/Settings';
+import About from 'modules/about/About';
 import PillViewer from 'modules/pillViewer/PillViewer';
 
 let routes = [
 	{ path: '/', cb: Login },
 	{ path: '/login', cb: Login },
 	{ path: '/register', cb: Register},
+	{ path: '/settings', cb: Settings},
+	{ path: '/about', cb: About},
 	{ path: '/mypill', cb: PillViewer},
 	{ path: '/createPass', cb: PillViewer},
 	{ path: '/editPass', cb: PillViewer}

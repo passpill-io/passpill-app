@@ -54,7 +54,7 @@ input:-moz-placeholder { color: $placeholder-color; }
 
 button, input[type=button], a.button, a.shadowButton {
 
-  background: rgba(77, 132, 146, 0.7);
+  background: #20C2E3;
   border-radius: 2px;
   border: 1px solid rgba(0,0,0,.1);
   padding: 9px 15px 10px;
@@ -65,19 +65,22 @@ button, input[type=button], a.button, a.shadowButton {
   color: #fff;
   display: inline-block;
   transition: background-color .3s,box-shadow .3s;
-  box-shadow: 0 2px rgba(77, 132, 146, 0.85);
+  box-shadow: 0 2px #13b3d4;
   text-shadow: 0 0 1px rgba(0,0,0,.2);
 
 
   &:focus {
-    outline: 2px solid rgba(255,255,255,.2);
+		border: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom-width: 0px;
+    outline: 1px solid #148da6;
+    box-shadow: 0 2px #148da6;
     position: relative;
     z-index: 1;
   }
 
-  &:hover {
-    background: rgba(77, 132, 146, .9);
-    box-shadow: 0 2px rgba(77, 132, 146, 1);
+  &:hover, &:active {
+    background: #19a4c5;
+    box-shadow: 0 2px #2892ad;
   }
 
   &.buttonBlock {
@@ -159,6 +162,9 @@ a.shadowButton {
     background-color: rgba( 0, 0, 0, .1);
     opacity: 1;
   }
+	&:focus {
+		border: 0;
+	}
 }
 
 .darkButtons {

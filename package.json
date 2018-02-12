@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "PassPill app",
+  "name": "passpill-app",
   "version": "1.0.0",
   "author": {
     "name": "Javi Marquez",
@@ -18,7 +18,6 @@
     "freezer-js": "^0.13.0",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.7",
     "rc-animate": "^2.4.4",
     "urlhub": "^0.1.1"
   },

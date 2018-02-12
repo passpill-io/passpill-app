@@ -37,7 +37,7 @@ export default class PillViewer extends React.Component {
 	}
 
 	getClassName(){
-		var className = 'pillViewer',
+		var className = 'screen pillViewer',
 			pathname = router.location.pathname
 		;
 

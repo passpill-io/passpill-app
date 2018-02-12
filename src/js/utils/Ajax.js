@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-var baseUrl = 'http://localhost:3333/api';
+import LS from 'utils/LocalStorage';
 
 var Ajax = {
 	requests: [],
@@ -20,7 +19,7 @@ var Ajax = {
 
 ['get', 'post', 'put', 'delete', 'patch'].forEach(m => {
 	Ajax[m] = function (path, data, options) {
-		var url = path[0] === '/' ? baseUrl + path : path,
+		var url = path[0] === '/' ? getBaseUrl() + path : path,
 			ops = options || {},
 			config = Object.assign({
 				method: m,
@@ -29,7 +28,7 @@ var Ajax = {
 				headers: {},
 				withCredentials: true
 			}, options || {})
-			;
+		;
 
 		return axios(config)
 			.then(response => {
@@ -39,6 +38,10 @@ var Ajax = {
 		;
 	}
 });
+
+function getBaseUrl(){
+	return LS.get('SERVER_URL') || 'http://localhost:3333/api';
+}
 
 
 export default Ajax;

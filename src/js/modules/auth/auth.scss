@@ -1,0 +1,29 @@
+.loginScreen {
+
+}
+
+.loginContainer {
+	max-width: 600px;
+	margin: 30px auto;
+	display: flex;
+}
+
+.loginLeft {
+	width: 50%;
+	text-align: right;
+	padding-right: 40px;
+	border-right: 1px solid $color-separator;
+
+	h2 {
+		margin: 10px 0;
+	}
+}
+
+.loginForm {
+	width: 50%;
+	padding-left: 40px;
+
+	input {
+		width: 100%;
+	}
+}
