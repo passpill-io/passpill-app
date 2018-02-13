@@ -39,6 +39,10 @@ a {
 	}
 }
 
+#app {
+	overflow: hidden;
+}
+
 $header-height: 50px;
 
 .appHeader {
@@ -57,7 +61,7 @@ $header-height: 50px;
     float: left;
 	}
 
-	a {
+	a.shadowButton {
 		color: #eee;
 	}
 

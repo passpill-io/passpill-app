@@ -7,21 +7,20 @@ import Animate from 'rc-animate';
  * that can show more than one toast at a time.
  *
  * To show a toast you need to use the method
- * show( contents, level, autoclose )
+ * show( contents, color, autoclose )
  * in the following way:
  *
  * import Toaster from 'Toaster';
- * Toaster.show( <div>No toaster!</div>, 'error', 5000 );
+ * Toaster.show( <div>No toaster!</div>, 'red', 5000 );
  *
  * contents: A string or React component with the message.
- * level: Toasts levels can be 'error', 'warn', 'info', 'success'. Default is 'error'
+ * color: Toasts colors can be 'red', 'yellow', 'blue', 'green'. Default is 'red'
  * autoclose: Milliseconds to autoclose. If 0 no autoclosing.
  */
 
 let ikey = 1, // keys for toast components
 	timers = {}, // Timers for autoclosing by key
-	toaster, // Ref to the loaded toaster
-	liveNots
+	toaster // Ref to the loaded toaster
 ;
 
 export default class Toaster extends React.Component {
@@ -36,11 +35,11 @@ export default class Toaster extends React.Component {
 		window.Toaster = Toaster;
 	}
 
-	static show(contents, level, autoclose, type, key) {
+	static show(contents, color, autoclose, type, key) {
 		let singleton = type === 'nots' ? liveNots : toaster,
 			toast = {
 				contents,
-				level: level || 'error',
+				color: color || 'red',
 				key: key || ikey,
 				closeOnClick: type === 'nots'
 			},
@@ -83,7 +82,7 @@ export default class Toaster extends React.Component {
 		let me = this,
 			toasts = this.state.toasts.map(t => {
 				return (
-					<Toast key={t.key} level={t.level} onClose={me.onClose(t.key)} closeOnClick={t.closeOnClick} showIcon={this.props.className === 'toaster'} >
+					<Toast key={t.key} color={t.color} onClose={me.onClose(t.key)} closeOnClick={t.closeOnClick} showIcon={this.props.className === 'toaster'} >
 						{t.contents}
 					</Toast>
 				);
@@ -146,15 +145,15 @@ export default class Toaster extends React.Component {
 }
 
 let icons = {
-	error: 'minus-circle',
-	warn: 'exclamation-circle',
-	success: 'check-circle'
+	red: 'minus-circle',
+	yellow: 'exclamation-circle',
+	green: 'check-circle'
 };
 
 export class Toast extends React.Component {
 	render() {
-		let level = this.props.level,
-			className = 'toast toast-' + level
+		let color = this.props.color,
+			className = 'toast toast-' + color
 		;
 
 		return (
@@ -163,7 +162,7 @@ export class Toast extends React.Component {
 					<i className="fa fa-times" />
 				</a>
 				<div className="toastIcon">
-					<i className={"fa fa-" + (icons[level] || 'pass')} />
+					<i className={"fa fa-" + (icons[color] || 'pass')} />
 				</div>
 				<div className="toastContent">
 					{this.props.children}

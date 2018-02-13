@@ -5,7 +5,6 @@ import PillMenu from './PillMenu';
 import PassList from './PassList';
 import PassEdit from './PassEdit';
 
-
 export default class PillViewer extends React.Component {
 	constructor(){
 		super();
@@ -23,7 +22,7 @@ export default class PillViewer extends React.Component {
 			<div className={ this.getClassName() }>
 				<div className="pwSelector">
 					<div className="pwSidebar">
-						<PillMenu />
+						<PillMenu search={ store.search } />
 					</div>
 					<div className="pwContent">
 						<PassList passes={ store.passes } order={ store.passOrder } onCreate={ () => freezer.emit('pass:create') } onEdit={ id => freezer.emit('pass:edit', id) } />

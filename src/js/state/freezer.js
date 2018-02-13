@@ -10,6 +10,6 @@ pillData: {
 field: {name, value, type: raw|pass}
 */
 
-let freezer = new Freezer({}, {live: true});
+let freezer = new Freezer({});
 
 module.exports = freezer;

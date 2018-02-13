@@ -1,5 +1,5 @@
 import axios from 'axios';
-import LS from 'utils/LocalStorage';
+import Settings from 'utils/Settings';
 
 var Ajax = {
 	requests: [],
@@ -40,7 +40,7 @@ var Ajax = {
 });
 
 function getBaseUrl(){
-	return LS.get('SERVER_URL') || 'http://localhost:3333/api';
+	return Settings.get(Settings.API_URL) || 'http://localhost:3333/api';
 }
 
 

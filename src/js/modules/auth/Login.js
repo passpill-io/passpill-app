@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'urlhub/Link';
 import Form from 'modules/common/Form';
-import LoadingButton from 'modules/common/LoadingButton';
 import freezer from 'state/freezer';
 
 export default class Login extends Form {
@@ -31,7 +30,7 @@ export default class Login extends Form {
 					<div className="loginForm loginRight">
 						{ this.renderInputGroup('text', 'username', {label: 'Pill name'} ) }
 						{ this.renderInputGroup('password', 'pass', {label: 'Pass phrase'}) }
-						<LoadingButton loading={ freezer.get().appStatus === 'LOGIN' } onClick={ () => this.login() } >Log in</LoadingButton>
+						<button onClick={ () => this.login() } >Log in</button>
 					</div>
 				</div>
 			</div>

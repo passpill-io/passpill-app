@@ -25,17 +25,6 @@
 	border-radius: 5px;
 }
 
-.searchBox {
-	height: 30px;
-	color: #999;
-	border-bottom: 1px solid #999;
-	margin-top: $hmargin;
-
-	i {
-		float: right;
-	}
-}
-
 .icon {
 	color: #009dbd;
 	margin-right: 10px;
@@ -64,13 +53,16 @@
 	left: 0; top: 0;
 	background: rgba(0,0,0,0.5);
 	z-index: -1;
-	opacity: 0;
+	opacity: 1;
 	transition: opacity .3s;
 	color: #fff;
 
+	&.statusOk {
+		opacity: 0;
+	}
+
 	&.visible {
 		z-index: 10000;
-		opacity: 1;
 	}
 }
 

@@ -26,6 +26,9 @@ class LoadingLayer extends Component {
 		if( this.state.visible ){
 			className += ' visible';
 		}
+		if( this.props.status === 'OK' ){
+			className += ' statusOk';
+		}
 
 		return (
 			<div className={ className }>

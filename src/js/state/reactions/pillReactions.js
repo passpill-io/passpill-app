@@ -1,6 +1,8 @@
 import freezer from 'state/freezer';
 import Ajax from 'utils/Ajax';
 import Crypto from 'utils/Crypto';
+import errorHandler from 'utils/errorHandler';
+
 
 function st(){ return freezer.get() };
 
@@ -10,7 +12,8 @@ st().set({
 	syncStatus: 'OK', // 'OK', 'LOCAL'
 	auth: false, // {username, u, p, k}
 	passes: false,
-	passOrder: []
+	passOrder: [],
+	search: { query: '' }
 });
 
 
@@ -32,7 +35,7 @@ freezer.on('pill:create', (user, pass) => {
 
 			// Save
 			st().set({ appStatus: 'SAVING' });
-			return Ajax.post('/createVault', {
+			return Ajax.post('/createPill', {
 				u: credentials.u,
 				p: credentials.p,
 				v: pill
@@ -41,7 +44,7 @@ freezer.on('pill:create', (user, pass) => {
 		.then( pill => freezer.emit('pill:receive', pill ) )
 		.catch( err => {
 			st().set({appStatus: 'OK'});
-			throw err;
+			errorHandler(err);
 		})
 	;
 });
@@ -50,7 +53,7 @@ freezer.on('pill:load', (user, pass) => {
 	let credentials = Crypto.hashCredentials( user, pass );
 	st().set({appStatus: 'LOADING'});
 
-	Ajax.post('/getVault', credentials)
+	Ajax.post('/getPill', credentials)
 		.then( pill => {
 			// Set credentials and the key afterwards
 			st().set({ auth:{
@@ -62,7 +65,7 @@ freezer.on('pill:load', (user, pass) => {
 		})
 		.catch( err => {
 			st().set({appStatus: 'OK'});
-			throw err;
+			errorHandler(err);
 		})
 	;
 });
@@ -109,7 +112,7 @@ freezer.on('pill:save', () => {
 	;
 
 	st().set({ appStatus: 'SAVING' });
-	return Ajax.post('/updateVault', payload )
+	return Ajax.post('/updatePill', payload )
 		.then( pill => freezer.emit('pill:receive', pill) )
 	;
 });

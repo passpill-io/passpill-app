@@ -29,15 +29,6 @@
     background: #fff;
     color: $dark-text;
   }
-
-  .toastClose {
-    cursor: pointer;
-    color: #999;
-
-    &:hover {
-      color: $dark-text;
-    }
-  }
 }
 
 .toast {
@@ -52,14 +43,14 @@
   position: relative;
 }
 
-.toast-error {
+.toast-red {
   background: $color-error;
 }
 
-.toast-warn {
+.toast-yellow {
   background: $color-warning;
 }
-.toast-success {
+.toast-green {
   background: $color-success;
 }
 
@@ -69,9 +60,11 @@
   transition: transform .3s;
   transform: scale(1);
   margin-left: 20px;
+  cursor: pointer;
+  color: #bbb;
 
   &:hover {
-    color: #fff;
+		color: $dark-text;
     transform: scale(1.5);
   }
 

@@ -2,7 +2,6 @@ import { render } from 'preact';
 import '../scss/all.scss';
 import 'state/reactions';
 
-
 function init() {
 	let elem = document.getElementById('root'),
 		App = require('./App').default
