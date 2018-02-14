@@ -27,7 +27,7 @@ class EditSettings extends Form {
 			<div className="screen settingsScreen">
 				<h3><i className="fa fa-cog icon-circle"></i> Settings</h3>
 				<div className="card box settingsBox">
-					{ this.renderInputGroup( 'text', 'apiUrl', {label: 'API base URL:'}) }
+					{ this.renderField( 'text', 'apiUrl', {label: 'API base URL:'}) }
 					<div className="controls">
 						<a className="shadowButton" onClick={ () => router.push('/login') }>{ cancelText }</a>
 						<button onClick={ () => this.onSave() }>Save</button>

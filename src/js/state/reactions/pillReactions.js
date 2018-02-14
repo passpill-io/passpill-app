@@ -38,13 +38,13 @@ freezer.on('pill:create', (user, pass) => {
 			return Ajax.post('/createPill', {
 				u: credentials.u,
 				p: credentials.p,
-				v: pill
+				v: result.pill
 			});
 		})
 		.then( pill => freezer.emit('pill:receive', pill ) )
 		.catch( err => {
 			st().set({appStatus: 'OK'});
-			errorHandler(err);
+			return getErrorResult( err ) || errorHandler( err );
 		})
 	;
 });
@@ -53,7 +53,7 @@ freezer.on('pill:load', (user, pass) => {
 	let credentials = Crypto.hashCredentials( user, pass );
 	st().set({appStatus: 'LOADING'});
 
-	Ajax.post('/getPill', credentials)
+	return Ajax.post('/getPill', credentials)
 		.then( pill => {
 			// Set credentials and the key afterwards
 			st().set({ auth:{
@@ -65,7 +65,7 @@ freezer.on('pill:load', (user, pass) => {
 		})
 		.catch( err => {
 			st().set({appStatus: 'OK'});
-			errorHandler(err);
+			return getErrorResult( err ) || errorHandler( err );
 		})
 	;
 });
@@ -128,4 +128,10 @@ let normalizePillData = function( pillData ){
 		normalized.passes = [];
 	}
 	return normalized;
+}
+
+let getErrorResult = function( err ){
+	if( err && err.response && err.response.data && err.response.data.code ){
+		return {error: true, code: err.response.data.code };
+	}
 }

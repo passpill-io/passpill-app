@@ -1,14 +1,21 @@
 import React from 'react';
 import Link from 'urlhub/Link';
 import Form from 'modules/common/Form';
+import Toaster from 'modules/common/Toaster';
 import freezer from 'state/freezer';
 
 export default class Login extends Form {
 	constructor() {
 		super();
 		this.state = {
-			username: '',
+			pillname: '',
 			password: ''
+		};
+
+		var wrongLoginMsg = "There is no pill for that name and password";
+		this.errorMessages = {
+			unknown_pill: wrongLoginMsg,
+			wrong_credentials: wrongLoginMsg
 		};
 	}
 
@@ -28,8 +35,8 @@ export default class Login extends Form {
 						<p class="small">Don't you have<br/>your own password pill?<br/><Link to="/register">Get one for free</Link></p>
 					</div>
 					<div className="loginForm loginRight">
-						{ this.renderInputGroup('text', 'username', {label: 'Pill name'} ) }
-						{ this.renderInputGroup('password', 'pass', {label: 'Pass phrase'}) }
+						{ this.renderField('text', 'pillname', {label: 'Pill name'} ) }
+						{ this.renderField('password', 'pass', {label: 'Pass phrase'}) }
 						<button onClick={ () => this.login() } >Log in</button>
 					</div>
 				</div>
@@ -38,6 +45,12 @@ export default class Login extends Form {
 	}
 
 	login(){
-		freezer.emit('pill:load', this.state.username, this.state.pass);
+		freezer.emit('pill:load', this.state.pillname, this.state.pass)
+			.then( result => {
+				if( result && result.error ){
+					Toaster.show( this.errorMessages[ result.code ] );
+				}
+			})
+		;
 	}
 }

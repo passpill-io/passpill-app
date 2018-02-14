@@ -15,11 +15,15 @@ const saltLength = 29;
 
 module.exports = {
 	createPill( data, password ){
-		let salt = bcrypt.genSaltSync(13);
+		let salt = bcrypt.genSaltSync(14);
 
 		return this.getKey( password, salt )
-			.then( key => this.encryptPill(data, key) )
-			.then( pill => ({key,pill}) )
+			.then( key => {
+				return {
+					pill: this.encryptPill(data, key),
+					key: key
+				};
+			})
 		;
 	},
 	getKey(password, salt) {

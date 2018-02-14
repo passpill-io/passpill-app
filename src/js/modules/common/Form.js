@@ -6,9 +6,9 @@ import React from 'react';
  * 1. extends the form component
  * class MyComponent extends Form({ ... })
  *
- * 2. Use the `renderInputGroup` method to create fields
+ * 2. Use the `renderField` method to create fields
  * render() {
- * 	return this.renderInputGroup( inputType, inputName, groupAttributes, inputAttributes );
+ * 	return this.renderField( inputType, inputName, groupAttributes, inputAttributes );
  * }
  *
  * The Form component will update this.state.{inputName} when the input changes
@@ -31,25 +31,16 @@ export default class Form extends React.Component {
 	 *
 	 * return {[type]}            [description]
 	 */
-	renderInputGroup(type, name, options = {}, inputAttrs = {}) {
+	renderField(type, name, options = {}, inputAttrs = {}) {
 
 		var className = "inputGroup";
 		if ( options.className ){
 			className += ' ' + options.className;
 		}
 
-
-		var label = <label htmlFor={name}>{options.label}</label>,
-			preLabel, postLabel
-		;
-
-		if (options.label) {
-			if( type==='checkbox' ){
-				postLabel = label;
-			}
-			else {
-				preLabel = label;
-			}
+		var label;
+		if (options.label && type !== 'checkbox' ) {
+			label = <label htmlFor={name}>{options.label}</label>;
 		}
 
 		var error;
@@ -75,7 +66,7 @@ export default class Form extends React.Component {
 
 		return (
 			<div className={className} { ...(options.attrs || {}) }>
-				{preLabel} {input} {postLabel} {error}
+				{label} {input} {error}
 			</div>
 		)
 	}
@@ -135,7 +126,7 @@ export default class Form extends React.Component {
 	}
 
 	renderCheck(name, options, attrs) {
-		var className = 'inputGroup checkbox fancyCheckbox ' + (options.className || ""),
+		var className = 'inputGroup checkbox coolCheckbox ' + (options.className || ""),
 			value = attrs.value !== undefined ? attrs.value : this.state[name]
 		;
 
@@ -148,7 +139,7 @@ export default class Form extends React.Component {
 
 		return (
 			<label className={className}>
-				<span className="fancyDiv"></span>
+				<span className="coolDiv"></span>
 				<input name={name} type="checkbox" onChange={attrs.onChange || (e => this.inputUpdate(e)) } />
 				<span>{options.label}</span>
 			</label>

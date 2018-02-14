@@ -67,10 +67,11 @@
 }
 
 .llContainer {
+	color: #eee;
 	background: rgba(0,0,0,0.2);
+	border: 10px solid transparent;
 	width: 200px;
 	height: 300px;
-	padding: 55px 0px;
 	border-radius: 100px;
 	text-align: center;
 	position: absolute;
@@ -78,10 +79,25 @@
 	transform: translate(-50%, -50%);
 	font-size: 1.5em;
 	box-shadow: 0 0 20px rgba(0,0,0,.2);
+	overflow: hidden;
+
+	.llTop {
+		height:50%;
+	}
+
+	.llBottom {
+		height: 50%;
+		background: rgba(255,255,255,.2);
+		border-bottom-left-radius: 50%;
+		border-bottom-right-radius: 50%;
+		padding-top: 32px;
+	}
 
 	i {
-		animation: spin 4s ease-in-out infinite;
-		font-size: 2.5em;
+		animation: spin 4s linear infinite;
+		font-size: 50px;
+		margin-top: 50px;
+		display: inline-block;
 	}
 }
 

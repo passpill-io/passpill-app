@@ -1,5 +1,5 @@
 import React from 'react';
-import LineInput from 'modules/common/lineInput';
+import LineInput from 'modules/common/LineInput';
 
 export default function Searcher( props ){
 	var indev;

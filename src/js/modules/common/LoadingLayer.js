@@ -33,8 +33,12 @@ class LoadingLayer extends Component {
 		return (
 			<div className={ className }>
 				<div className="llContainer">
-					<p><i className="fa fa-cog"></i></p>
-					<p>{ this.statusMessages[ this.state.status ] }</p>
+					<div className="llTop">
+						<i className="fa fa-asterisk"></i>
+					</div>
+					<div className="llBottom">
+						{ this.statusMessages[ this.state.status ] }
+					</div>
 				</div>
 			</div>
 		);
