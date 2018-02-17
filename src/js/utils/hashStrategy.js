@@ -35,13 +35,13 @@ var hashStrategy = {
     this.emit();
   },
   onChange: function( cb ){
-    this.onChange = cb;
+    onChange = cb;
   },
   getLocation: function(){
 		return location.hash.slice(1);
   },
   emit: function(){
-    this.onChange( this.getLocation() );
+    onChange( this.getLocation() );
   }
 };
 

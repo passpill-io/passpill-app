@@ -259,7 +259,7 @@ a.shadowButton {
   }
 }
 
-.inputGroup {
+.inputField {
   margin-bottom: 20px;
 
   label {
@@ -303,57 +303,6 @@ a.shadowButton {
   p {
     margin-top: 10px;
   }
-}
-
-.datePicker {
-  select {
-    margin-right: 5px;
-  }
-}
-
-.timePicker {
-  text-align: center;
-}
-
-.exclamation {
-  display: inline-block;
-  margin-right: 10px;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  width: 18px;
-  line-height: 16px;
-  height: 18px;
-  text-align: center;
-}
-
-.statusPicker {
-  position: relative;
-  background-position: right 20px top 18px;
-
-
-  .inputGroup {
-    margin: 0;
-  }
-
-  select {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    opacity: 0.01;
-    cursor: pointer;
-    height: 40px;
-  }
-
-  &.light {
-    .userStatus:before {
-      border: 2px solid rgba(0,0,0,.3);
-    }
-    path {
-      fill: #b1f59a !important;
-    }
-  }
-
 }
 
 @keyframes spin {

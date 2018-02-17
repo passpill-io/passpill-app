@@ -106,3 +106,27 @@
 	max-height: 150px;
 	padding: 9px 15px 8px;
 }
+
+/* TABS */
+
+.tabHeader {
+	border-bottom: 1px solid rgba(0,0,0,.1);
+
+	a {
+		display: inline-block;
+		color: $dark-fade;
+		border-bottom: 3px solid transparent;
+		padding: 5px 15px;
+		margin-bottom: -2px;
+		font-size: 1.1em;
+
+		&:hover {
+			color: $blue2;
+		}
+
+		&.tabCurrent{
+			border-color: $blue1;
+			color: $dark-text;
+		}
+	}
+}

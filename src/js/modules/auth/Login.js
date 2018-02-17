@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'urlhub/Link';
 import Form from 'modules/common/Form';
-import Toaster from 'modules/common/Toaster';
 import freezer from 'state/freezer';
 
 export default class Login extends Form {

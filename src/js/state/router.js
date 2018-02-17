@@ -21,5 +21,12 @@ let routes = [
 let router = urlhub.create(routes, { strategy: hashStrategy });
 
 // The app will use these to block access to unauthenticated screens
-router.openRoutes = {'/login':1, '/register': 1};
+router.openOnly = new Set([
+	'/login', '/register', '/about', '/settings'
+]);
+router.authOnly = new Set([
+	'/mypill', '/createPass', '/editPass'
+]);
+
+
 export default router;

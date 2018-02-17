@@ -4,6 +4,7 @@ import utils from 'utils/utils';
 
 import Form from 'modules/common/Form';
 import Toaster from 'modules/common/Toaster';
+import Link from 'urlhub/Link';
 
 export default class Register extends Form {
 	constructor(){
@@ -20,6 +21,12 @@ export default class Register extends Form {
 	render() {
 		return (
 			<div className="screen registerScreen">
+				<div className="loginContainer">
+					<div className="alert yellow">
+						<p>This app is in an <strong>alpha stage</strong>.</p>
+						<p>You need to <Link to="/settings">connect it to your own server</Link> in order to work.</p>
+					</div>
+				</div>
 				<div className="loginContainer">
 					<div className="loginLeft">
 						<h2>Create your PassPill</h2>

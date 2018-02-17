@@ -35,22 +35,28 @@ class App extends React.Component {
 			component = router.location.matches[0]
 		;
 
+		// Never get into the root route
 		if( router.location.pathname === '/' ){
 			next = '/login';
 		}
 
-		if( !auth && !router.openRoutes[next] ){
+		// Don't allow to get into auth or open routes
+		// depending if the user is authenticated
+		if( !auth && router.authOnly.has(next) ){
 			next = '/login';
 		}
-		else if( auth && router.openRoutes[next] ){
+		else if( auth && router.openOnly.has(next) ){
 			next = '/mypill';
 		}
 
+		// If the next location is not the current one
+		// calculate the next component
 		if( next !== this.currentLocation ){
 			this.currentLocation = next;
 			router.replace( next );
 			component = router.match( next ).matches[0];
 		}
+
 
 		return component;
 	}

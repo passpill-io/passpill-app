@@ -6,7 +6,7 @@ export default class Header extends React.Component {
 		return (
 			<header className="appHeader">
 				<div className="wideScreen">
-					<h1>PassPill</h1>
+					<h1><Link to="/">PassPill</Link></h1>
 					<div className="headerLinks">
 						<Link to="/about" className="aboutButton shadowButton"><i className="fa fa-question-circle"></i></Link>
 						<Link to="/settings" className="settingsButton shadowButton"><i className="fa fa-cog"></i></Link>

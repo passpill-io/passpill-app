@@ -33,7 +33,7 @@ export default class Form extends React.Component {
 	 */
 	renderField(type, name, options = {}, inputAttrs = {}) {
 
-		var className = "inputGroup";
+		var className = "inputField";
 		if ( options.className ){
 			className += ' ' + options.className;
 		}
@@ -126,7 +126,7 @@ export default class Form extends React.Component {
 	}
 
 	renderCheck(name, options, attrs) {
-		var className = 'inputGroup checkbox coolCheckbox ' + (options.className || ""),
+		var className = 'inputField checkbox coolCheckbox ' + (options.className || ""),
 			value = attrs.value !== undefined ? attrs.value : this.state[name]
 		;
 
