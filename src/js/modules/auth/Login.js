@@ -31,13 +31,13 @@ export default class Login extends Form {
 					<div className="loginLeft">
 						<h2>Get your pill</h2>
 						<p>All your passwords will come back to your mind.</p>
-						<p class="small">Don't you have<br/>your own password pill?<br/><Link to="/register">Get one for free</Link></p>
+						<p class="small">Don´t you have<br/>your own password pill?<br/><Link to="/register">Get one for free</Link></p>
 					</div>
-					<div className="loginForm loginRight">
+					<Form className="loginForm loginRight">
 						{ this.renderField('text', 'pillname', {label: 'Pill name'} ) }
 						{ this.renderField('password', 'pass', {label: 'Pass phrase'}) }
 						<button onClick={ () => this.login() } >Log in</button>
-					</div>
+					</Form>
 				</div>
 			</div>
 		);

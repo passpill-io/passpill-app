@@ -22,7 +22,7 @@ module.exports = env => {
 			app: './src/js/boot.js',
 			vendor: [
 				// pull these to a `vendor.js` file
-				'preact'
+				'inferno'
 			]
 		},
 		output: {
@@ -36,8 +36,8 @@ module.exports = env => {
 				'modules': join(src, 'js/modules'),
 				'state': join(src, 'js/state'),
 				'utils': join(src, 'js/utils'),
-				'react': 'preact-compat',
-				'react-dom': 'preact-compat'
+				'react': 'inferno-compat',
+				'react-dom': 'inferno-compat'
 			}
 		},
 		module: {

@@ -57,9 +57,9 @@ class Tabs extends Component {
 	}
 
 	getTabContents( node, current ){
-		if(!node || !node.attributes || !node.attributes.id || !node.attributes['data-tabTitle']) return;
+		if(!node || !node.props || !node.props.id || !node.props['data-tabTitle']) return;
 
-		let attrs = node.attributes,
+		let attrs = node.props,
 			tabClass = 'tabTitle',
 			isCurrent = attrs.id === current
 		;

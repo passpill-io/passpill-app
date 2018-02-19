@@ -18,6 +18,7 @@ class AutoTextArea extends Component {
 	}
 
 	calculateHeight(){
+		if( !this.textarea ) return;
 		let height = this.textarea.scrollHeight;
 		if( height !== this.state.height ){
 			this.setState({height});

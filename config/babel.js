@@ -4,6 +4,6 @@ module.exports = {
 		'stage-2'
 	],
 	plugins: [
-		['transform-react-jsx', {}]
+		["babel-plugin-inferno", {"imports": true}]
 	]
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default class PassEdit extends React.Component {
+export default class PassItem extends React.Component {
 	render(){
 		let pass = this.props.pass;
 		return (
@@ -25,7 +25,7 @@ export default class PassEdit extends React.Component {
 				list.push(
 					<div className="passField passUrlField">
 						<span className="passFieldName">{ f.name }: </span>
-						<span className="passFieldValue"><a href={value} target="_blank">{ this.getDomain(value) } <i className="fa fa-external-link-square-alt"></i></a></span>
+						<span className="passFieldValue"><a href={value} target="_blank" onClick={ e => e.preventDefault() }>{ this.getDomain(value) } <i className="fa fa-external-link-square-alt"></i></a></span>
 					</div>
 				);
 			}
@@ -33,14 +33,14 @@ export default class PassEdit extends React.Component {
 				list.push(
 					<div className="passField passCopyField" key={ f.name }>
 						<span className="passFieldName">{ f.name }: </span>
-						<span className="passFieldValue" onClick={ () => this.copy(value) }>{ value.slice(0,30) }{ value.length > 30 ? '...' : ''} <i className="fa fa-clipboard"></i></span>
+						<span className="passFieldValue" onClick={ e => this.copy(e,value) }>{ value.slice(0,30) }{ value.length > 30 ? '...' : ''} <i className="fa fa-clipboard"></i></span>
 					</div>
 				);
 			}
 		})
 
 		return (
-			<div className="passFields" onClick={ e => e.preventDefault() }>
+			<div className="passFields">
 				{ list }
 			</div>
 		);
@@ -56,7 +56,8 @@ export default class PassEdit extends React.Component {
 		this.props.onEdit( id );
 	}
 
-	copy( value ){
+	copy( e, value ){
+		e.preventDefault();
 		console.log('Copying');
 	}
 }

@@ -1,4 +1,6 @@
-import { render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import '../scss/all.scss';
 import 'state/reactions';
 
@@ -6,8 +8,8 @@ function init() {
 	let elem = document.getElementById('root'),
 		App = require('./App').default
 	;
-	elem.innerHTML = '';
-	elem = render(App, elem);
+
+	ReactDOM.render(App, elem);
 }
 
 if( location.host.indexOf('passpill.io') !== -1 && location.search.indexOf('dev') === -1 ){

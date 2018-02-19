@@ -22,6 +22,13 @@ export default class Form extends React.Component {
 	}
 
 	/**
+	 * A helper component to avoid repeating autocomplete and submit
+	 */
+	render(){
+		return <form autoComplete="off" onSubmit={ e => e.preventDefault() } {...this.props}>{ this.props.children }</form>;
+	}
+
+	/**
 	 * Render a group of label + input
 	 *
 	 * @param  {string} type       The type of the input as accepted by renderInput. text|radio|password...

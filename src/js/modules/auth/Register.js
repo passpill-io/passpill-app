@@ -33,14 +33,14 @@ export default class Register extends Form {
 						<p>In your own password pill you can store all your password securely and privately.</p>
 						<p>Make sure you give your pill an unique name and select a long pass phrase that will be used to encrypt it.</p>
 					</div>
-					<div className="loginForm loginRight">
+					<Form className="loginForm loginRight">
 						{this.renderField('text', 'pillname', { label: 'Pill name' })}
 						{this.renderField('password', 'pass', { label: 'Pass phrase' })}
 						{this.renderField('password', 'confirm', { label: 'Confirm pass phrase' })}
 						{this.renderField('checkbox', 'userDuty', { label: "I understand that PassPill can't recover my password." })}
 						{this.renderField('checkbox', 'terms', { label: "I accept PassPill terms and conditions" })}
 						<button onClick={ () => this.register() }>Register</button>
-					</div>
+					</Form>
 				</div>
 			</div>
 		);

@@ -3,7 +3,7 @@ const SKEY = 'pps';
 function loadSettings(){
 	var s;
 	try {
-		s = JSON.parse( localStorage.getItem( SKEY ) || {} );
+		s = JSON.parse( localStorage.getItem( SKEY ) || "{}" );
 	}
 	catch( e ){
 		console.error("Can't get settings from local storage");

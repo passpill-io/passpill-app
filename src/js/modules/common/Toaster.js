@@ -32,6 +32,7 @@ export default class Toaster extends React.Component {
 		};
 
 		toaster = this;
+		window.toaster = Toaster;
 	}
 
 	static show(contents, color, autoclose, type, key) {

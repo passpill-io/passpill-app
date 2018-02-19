@@ -22,7 +22,7 @@ export default class PassEdit extends React.Component {
 		var pass = this.props.pass;
 
 		return (
-			<div className="peBody">
+			<form className="peBody" onSubmit={ e => e.preventDefault() } autoComplete="off">
 				<LineInput value={ pass.name }
 					className="big peName"
 					onChange={ e => pass.set({name: e.target.value}) }
@@ -39,7 +39,7 @@ export default class PassEdit extends React.Component {
 					<a onClick={ () => router.back() }>Cancel</a>
 					<button onClick={ () => this.props.onSave() }>Save</button>
 				</div>
-			</div>
+			</form>
 		);
 	}
 

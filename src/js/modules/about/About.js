@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Tabs from 'modules/common/Tabs';
 import router from 'state/router';
-import Link from 'urlhub/link';
+import Link from 'urlhub/Link';
 
 class About extends Component {
 	render() {

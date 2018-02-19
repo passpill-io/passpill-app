@@ -61,16 +61,19 @@ class App extends React.Component {
 		return component;
 	}
 
-	componentWillUpdate(){
+	update(){
 		let component = this.getComponent();
 		if( component !== this.state.component ){
 			this.setState({component});
 		}
+		else {
+			this.forceUpdate();
+		}
 	}
 
 	componentDidMount(){
-		freezer.on('update', () => this.forceUpdate());
-		router.onChange( () => this.forceUpdate() );
+		freezer.on('update', () => this.update() );
+		router.onChange( () => this.update() );
 	}
 }
 
