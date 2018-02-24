@@ -1,7 +1,7 @@
 {
-  "name": "Preact Starter",
-  "short_name": "Preact",
-  "start_url": "/?homescreen=1",
+  "name": "PassPill App",
+  "short_name": "PassPill",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#F2F2F2",
