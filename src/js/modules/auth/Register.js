@@ -19,6 +19,10 @@ export default class Register extends Form {
 	}
 
 	render() {
+		var termsLabel = <span>I accept <Link to="/about?tab=terms">PassPill terms and conditions</Link>.</span>,
+			recoverLabel = <span>I understand that <Link to="/about?tab=security">PassPill can't recover my password</Link>.</span>
+		;
+
 		return (
 			<div className="screen registerScreen">
 				<div className="loginContainer">
@@ -30,15 +34,15 @@ export default class Register extends Form {
 				<div className="loginContainer">
 					<div className="loginLeft">
 						<h2>Create your PassPill</h2>
-						<p>In your own password pill you can store all your password securely and privately.</p>
+						<p>In your own password pill you can store all your passwords securely and privately.</p>
 						<p>Make sure you give your pill an unique name and select a long pass phrase that will be used to encrypt it.</p>
 					</div>
 					<Form className="loginForm loginRight">
 						{this.renderField('text', 'pillname', { label: 'Pill name' })}
 						{this.renderField('password', 'pass', { label: 'Pass phrase' })}
 						{this.renderField('password', 'confirm', { label: 'Confirm pass phrase' })}
-						{this.renderField('checkbox', 'userDuty', { label: "I understand that PassPill can't recover my password." })}
-						{this.renderField('checkbox', 'terms', { label: "I accept PassPill terms and conditions" })}
+						{this.renderField('checkbox', 'userDuty', { label: recoverLabel })}
+						{this.renderField('checkbox', 'terms', { label: termsLabel })}
 						<button onClick={ () => this.register() }>Register</button>
 					</Form>
 				</div>
