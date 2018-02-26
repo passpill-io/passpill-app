@@ -14,7 +14,7 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dfe6e8', endColorstr='#f9fbfb', GradientType=0 );
 
 	background-attachment: fixed;
-	color: #353c3e;
+	color: $dark-text;
 	font-size: 18px;
 
 	font-family: 'Oxygen', sans-serif;
@@ -22,7 +22,7 @@ body {
 
 h1, h2, h3, h4 {
 	font-family: 'Raleway', sans-serif;
-	color: $blue3;
+	color: $dark-text;
 }
 
 h1 { font-size: 3em; }

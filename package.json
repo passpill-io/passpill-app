@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node_modules/.bin/webpack --config config/webpack",
-    "start": "node_modules/.bin/webpack-dev-server --config config/webpack --public hexxie.com:3001"
+    "start": "node_modules/.bin/webpack-dev-server --config config/webpack --public localhost:3001"
   },
   "dependencies": {
     "axios": "^0.17.1",

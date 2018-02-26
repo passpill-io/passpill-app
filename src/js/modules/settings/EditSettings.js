@@ -1,7 +1,9 @@
 import React from 'react';
 import router from 'state/router';
-import Form from 'modules/common/Form';
 import Settings from 'utils/Settings';
+
+import Form from 'modules/common/Form';
+import Toaster from 'modules/common/Toaster';
 
 class EditSettings extends Form {
 	constructor(){
