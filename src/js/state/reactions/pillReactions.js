@@ -20,11 +20,13 @@ st().set({
 freezer.on('pill:create', (user, pass) => {
 	st().set({ appStatus: 'ENCRYPTING' });
 
-	let credentials = Crypto.hashCredentials(user, pass),
-		pillData = { passes: [] }
+	var pillData = { passes: [] },
+		credentials
 	;
 
-	return Crypto.createPill( pillData, pass )
+	return Crypto.hashCredentials(user, pass)
+		.then( c => credentials = c )
+		.then( () => Crypto.createPill( pillData, pass ) )
 		.then( result => {
 			// Set credentials
 			st().set({ auth:{
@@ -50,10 +52,13 @@ freezer.on('pill:create', (user, pass) => {
 });
 
 freezer.on('pill:load', (user, pass) => {
-	let credentials = Crypto.hashCredentials( user, pass );
+	var credentials;
+
 	st().set({appStatus: 'LOADING'});
 
-	return Ajax.post('/getPill', credentials)
+	return Crypto.hashCredentials( user, pass )
+		.then( c => credentials = c )
+		.then( () => Ajax.post('/getPill', credentials) )
 		.then( pill => {
 			// Set credentials and the key afterwards
 			st().set({ auth:{

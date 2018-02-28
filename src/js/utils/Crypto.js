@@ -72,10 +72,19 @@ module.exports = {
 	encrypt(data, k) {
 		return aes.encrypt(JSON.stringify(data), k).toString();
 	},
+
 	hashCredentials( user, pass ){
-		return {
-			u: md5( user ).toString(),
-			p: sha1( pass ).toString()
-		};
+		let u = md5(user).toString(),
+			salt = '$2a$12$' + sha1(user).toString().slice(0,22)
+		;
+
+		return new Promise(resolve => {
+			bcrypt.hash(pass, salt, (err, p) => {
+				resolve({
+					u: u,
+					p: p.slice(-40)
+				});
+			});
+		});
 	}
 };

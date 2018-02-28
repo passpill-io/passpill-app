@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'urlhub/Link';
 import Form from 'modules/common/Form';
+import Toaster from 'modules/common/Toaster';
 import freezer from 'state/freezer';
 
 export default class Login extends Form {
@@ -14,7 +15,8 @@ export default class Login extends Form {
 		var wrongLoginMsg = "There is no pill for that name and password";
 		this.errorMessages = {
 			unknown_pill: wrongLoginMsg,
-			wrong_credentials: wrongLoginMsg
+			wrong_credentials: wrongLoginMsg,
+			bad_params: "Oops! Seems that we can't connect to the server right now. Try later."
 		};
 	}
 
