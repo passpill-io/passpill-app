@@ -6,7 +6,7 @@ Frontend pill
 */
 
 let md5 = require('crypto-js/md5');
-let sha1 = require('crypto-js/sha1');
+let sha256 = require('crypto-js/sha256');
 let aes = require('crypto-js/aes');
 let utf8 = require('crypto-js/enc-utf8');
 let bcrypt = require('bcryptjs');
@@ -56,6 +56,7 @@ module.exports = {
 
 		return salt + encrypted;
 	},
+
 	decrypt(encrypted, k){
 		let pillData = aes.decrypt(encrypted, k).toString(utf8);
 
@@ -74,15 +75,13 @@ module.exports = {
 	},
 
 	hashCredentials( user, pass ){
-		let u = md5(user).toString(),
-			salt = '$2a$12$' + sha1(user).toString().slice(0,22)
-		;
+		let salt = '$2a$12$' + sha256(user+pass).toString().slice(0,22);
 
 		return new Promise(resolve => {
 			bcrypt.hash(pass, salt, (err, p) => {
 				resolve({
-					u: u,
-					p: p.slice(-40)
+					u: sha256(user).toString().slice(-32),
+					p: p.slice(-32)
 				});
 			});
 		});
