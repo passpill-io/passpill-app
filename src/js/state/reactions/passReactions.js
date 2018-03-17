@@ -1,14 +1,11 @@
-import freezer from 'state/freezer';
+import store from 'state/store';
 import router from 'state/router';
 
-function st(){ return freezer.get() };
+store.editPass = false;
 
-st().set({
-	editPass: false
-});
+window.appstate = store;
 
-
-freezer.on('pass:create', pass => {
+store.on('pass:create', pass => {
 	var editPass = {
 		id: 'new',
 		name: 'New pass',
@@ -18,39 +15,37 @@ freezer.on('pass:create', pass => {
 		]
 	};
 
-	freezer.get().set({editPass});
+	store.editPass = editPass;
 
 	router.push('/createPass');
 });
 
-freezer.on('pass:edit', passId => {
-	var pass = freezer.get().passes[ passId ];
+store.on('pass:edit', passId => {
+	var pass = store.passes[ passId ];
 	if( !pass ) return;
-	freezer.get().set({ editPass: pass.toJS() });
+	store.editPass = Object.assign({}, pass);
 	router.push('/editPass');
 });
 
-freezer.on('pass:save', () => {
-	var editPass = st().editPass;
+store.on('pass:save', () => {
+	var editPass = store.editPass;
 	if( !editPass ) return;
 
-	var pass = editPass.toJS();
+	var pass = Object.assign({}, editPass);
 	if( pass.id === 'new' ){
 		// Pass creation
 		pass.id = Date.now();
-		st().passes.set( pass.id, pass );
-		st().passOrder.push( pass.id );
+		store.passOrder.push( pass.id );
 	}
-	else {
-		st().passes.set( pass.id, pass );
-	}
-	freezer.emit('pill:save');
+	store.passes[pass.id] = pass;
+	store.emit('pill:save');
 	router.back();
 });
 
-freezer.on('pass:delete', passId => {
-	st().passes.remove(passId);
-	var idx = st().passOrder.indexOf(passId);
-	st().passOrder.splice(idx, 1);
-	freezer.emit('pill:save');
+store.on('pass:delete', passId => {
+	delete store.passes[passId];
+
+	var idx = store.passOrder.indexOf(passId);
+	store.passOrder.splice(idx, 1);
+	store.emit('pill:save');
 });

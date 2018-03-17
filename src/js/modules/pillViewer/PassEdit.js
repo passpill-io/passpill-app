@@ -25,7 +25,7 @@ export default class PassEdit extends React.Component {
 			<form className="peBody" onSubmit={ e => e.preventDefault() } autoComplete="off">
 				<LineInput value={ pass.name }
 					className="big peName"
-					onChange={ e => pass.set({name: e.target.value}) }
+					onChange={ e => pass.name = e.target.value }
 					label="Pass name" />
 				<div className="peFields box">
 					<h4 className="peFieldsTitle"><i className="fa fa-list-ul icon"></i> Fields</h4>

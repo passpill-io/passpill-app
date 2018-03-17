@@ -1,4 +1,4 @@
-let Freezer = require('freezer-js');
+import onState from 'onState';
 
 /**
 pillData: {
@@ -10,6 +10,5 @@ pillData: {
 field: {name, value, type: raw|pass}
 */
 
-let freezer = new Freezer({});
-
-module.exports = freezer;
+let store = onState({});
+export default store;

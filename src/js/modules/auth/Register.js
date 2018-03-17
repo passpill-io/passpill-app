@@ -1,5 +1,5 @@
 import React from 'react';
-import freezer from 'state/freezer';
+import store from 'state/store';
 import utils from 'utils/utils';
 
 import Form from 'modules/common/Form';
@@ -72,12 +72,11 @@ export default class Register extends Form {
 		}
 
 
-		freezer.emit('pill:create', this.state.pillname, this.state.pass )
+		store.emit('pill:create', this.state.pillname, this.state.pass )
 			.then( result => {
 				if( result && result.error && result.code === 'pill_already_exist' ){
 					Toaster.show('Sorry, the pillname already exist.');
 				}
-
 			})
 		;
 	}

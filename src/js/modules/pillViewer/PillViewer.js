@@ -1,5 +1,5 @@
 import React from 'react';
-import freezer from 'state/freezer';
+import store from 'state/store';
 import router from 'state/router';
 import PillMenu from './PillMenu';
 import PassList from './PassList';
@@ -16,8 +16,6 @@ export default class PillViewer extends React.Component {
 	}
 
 	render(){
-		let store = freezer.get();
-
 		return (
 			<div className={ this.getClassName() }>
 				<div className="pwSelector">
@@ -25,11 +23,11 @@ export default class PillViewer extends React.Component {
 						<PillMenu search={ store.search } />
 					</div>
 					<div className="pwContent">
-						<PassList passes={ store.passes } order={ store.passOrder } onCreate={ () => freezer.emit('pass:create') } onEdit={ id => freezer.emit('pass:edit', id) } />
+						<PassList passes={ store.passes } order={ store.passOrder } onCreate={ () => store.emit('pass:create') } onEdit={ id => store.emit('pass:edit', id) } />
 					</div>
 				</div>
 				<div className="pwEdit">
-					<PassEdit pass={ freezer.get().editPass } onSave={ () => freezer.emit('pass:save') } />
+					<PassEdit pass={ store.editPass } onSave={ () => store.emit('pass:save') } />
 				</div>
 			</div>
 		);
@@ -48,11 +46,10 @@ export default class PillViewer extends React.Component {
 	}
 
 	edit( id ){
-
-		var pass = freezer.get().passes[id];
+		var pass = store.passes[id];
 		if( !pass ) return;
-		freezer.get().set({ editPass: pass.toJS() });
+
+		store.editPass = Object.assign({}, pass);
 		router.push('/editPass');
 	}
-
 }

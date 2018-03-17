@@ -4,7 +4,6 @@ import AutoTextArea from 'modules/common/AutoTextArea';
 
 
 class PassFieldEdit extends Component {
-
 	render() {
 		var field = this.props.field,
 			eyeClass = 'fa fa-eye' + ( field.hidden ? '-slash' : '' ),
@@ -16,7 +15,7 @@ class PassFieldEdit extends Component {
 			<div className="passFieldEdit box shortbox card">
 				<LineInput className="pfeName"
 					value={ field.name }
-					onChange={ e => field.set({name: e.target.value}) } />
+					onChange={ e => field.name = e.target.value } />
 				<div className="pfeValue">
 					{ this.renderInput( field ) }
 				</div>
@@ -35,7 +34,7 @@ class PassFieldEdit extends Component {
 		;
 
 		return (
-			<a onClick={ e => field.set({hidden: !field.hidden}) }>
+			<a onClick={ e => field.hidden = !field.hidden }>
 				<i className={ cn }></i> {text}
 			</a>
 		);
@@ -47,7 +46,7 @@ class PassFieldEdit extends Component {
 		;
 
 		return (
-			<a onClick={ e => field.set({listed: !field.listed}) }>
+			<a onClick={ e => field.listed = !field.listed }>
 				<i className={ cn }></i> {text}
 			</a>
 		);
@@ -59,13 +58,13 @@ class PassFieldEdit extends Component {
 			return (
 				<input type="password"
 					value={ field.value }
-					onChange={ e => field.set({value: e.target.value}) } />
+					onChange={ e => (field.value = e.target.value) && this.forceUpdate() } />
 			);
 		}
 
 		return (
 			<AutoTextArea value={ field.value }
-				onChange={ e => field.set({value: e.target.value}) } />
+				onChange={ e => (field.value = e.target.value) && this.forceUpdate() } />
 		);
 	}
 

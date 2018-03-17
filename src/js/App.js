@@ -4,7 +4,7 @@ import Toaster from 'modules/common/Toaster';
 import LoadingLayer from 'modules/common/LoadingLayer';
 
 import router from 'state/router';
-import freezer from 'state/freezer';
+import store from 'state/store';
 
 class App extends React.Component {
 	constructor(props) {
@@ -24,14 +24,14 @@ class App extends React.Component {
 				<Header />
 				<Component />
 				<Toaster />
-				<LoadingLayer status={ freezer.get().appStatus } />
+				<LoadingLayer status={ store.appStatus } />
 			</div>
 		);
 	}
 
 	getComponent(){
 		let next = router.location.pathname + router.location.search,
-			auth = !!freezer.get().pillData,
+			auth = !!store.pillData,
 			component = router.location.matches[0]
 		;
 
@@ -72,7 +72,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount(){
-		freezer.on('update', () => this.update() );
+		store.on('state', () => this.update() );
 		router.onChange( () => this.update() );
 	}
 }

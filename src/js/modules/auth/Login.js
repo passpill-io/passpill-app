@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'urlhub/Link';
 import Form from 'modules/common/Form';
 import Toaster from 'modules/common/Toaster';
-import freezer from 'state/freezer';
+import store from 'state/store';
 
 export default class Login extends Form {
 	constructor() {
@@ -46,7 +46,7 @@ export default class Login extends Form {
 	}
 
 	login(){
-		freezer.emit('pill:load', this.state.pillname, this.state.pass)
+		store.emit('pill:load', this.state.pillname, this.state.pass)
 			.then( result => {
 				if( result && result.error ){
 					Toaster.show( this.errorMessages[ result.code ] );

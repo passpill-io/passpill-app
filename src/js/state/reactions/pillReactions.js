@@ -1,12 +1,9 @@
-import freezer from 'state/freezer';
+import store from 'state/store';
 import Ajax from 'utils/Ajax';
 import Crypto from 'utils/Crypto';
 import errorHandler from 'utils/errorHandler';
 
-
-function st(){ return freezer.get() };
-
-st().set({
+Object.assign( store, {
 	appStatus: 'OK', // 'INIT', 'LOGIN', 'LOGOUT', 'OK'
 	saveStatus: 'OK', // 'OK', 'ENCODE', 'SAVE'
 	syncStatus: 'OK', // 'OK', 'LOCAL'
@@ -16,9 +13,8 @@ st().set({
 	search: { query: '' }
 });
 
-
-freezer.on('pill:create', (user, pass) => {
-	st().set({ appStatus: 'ENCRYPTING' });
+store.on('pill:create', (user, pass) => {
+	store.appStatus = 'ENCRYPTING';
 
 	var pillData = { passes: [] },
 		credentials
@@ -29,55 +25,56 @@ freezer.on('pill:create', (user, pass) => {
 		.then( () => Crypto.createPill( pillData, pass ) )
 		.then( result => {
 			// Set credentials
-			st().set({ auth:{
+			store.auth = {
 				u: credentials.u,
 				p: credentials.p,
 				k: result.key
-			}});
+			};
 
 			// Save
-			st().set({ appStatus: 'SAVING' });
+			store.appStatus = 'SAVING';
 			return Ajax.post('/createPill', {
 				u: credentials.u,
 				p: credentials.p,
 				v: result.pill
 			});
 		})
-		.then( pill => freezer.emit('pill:receive', pill ) )
+		.then( pill => store.emit('pill:receive', pill ) )
 		.catch( err => {
-			st().set({appStatus: 'OK'});
+			store.appStatus = 'OK';
 			return getErrorResult( err ) || errorHandler( err );
 		})
 	;
 });
 
-freezer.on('pill:load', (user, pass) => {
+store.on('pill:load', (user, pass) => {
 	var credentials;
 
-	st().set({appStatus: 'LOADING'});
+	store.appStatus = 'LOADING';
 
 	return Crypto.hashCredentials( user, pass )
 		.then( c => credentials = c )
 		.then( () => Ajax.post('/getPill', credentials) )
 		.then( pill => {
 			// Set credentials and the key afterwards
-			st().set({ auth:{
+			store.auth = {
 				u: credentials.u,
 				p: credentials.p
-			}});
-			st().set({appStatus: 'DECRYPTING'});
-			return freezer.emit('pill:receive', pill, pass);
+			};
+			store.appStatus = 'DECRYPTING';
+
+			return store.emit('pill:receive', pill, pass);
 		})
 		.catch( err => {
-			st().set({appStatus: 'OK'});
+			store.appStatus = 'OK';
 			return getErrorResult( err ) || errorHandler( err );
 		})
 	;
 });
 
-freezer.on('pill:receive', (pill, pass) => {
+store.on('pill:receive', (pill, pass) => {
 	var decryptMethod = pass ? 'decryptPill' : 'decryptPillWithKey',
-		key = pass || st().auth.k
+		key = pass || store.auth.k
 	;
 
 	return Crypto[decryptMethod]( pill, key )
@@ -93,10 +90,10 @@ freezer.on('pill:receive', (pill, pass) => {
 			});
 
 			// Set the key
-			st().auth.set({k: result.key});
+			store.auth.k = result.key;
 
 			// All the pill data
-			st().set({
+			Object.assign(store, {
 				appStatus: 'OK',
 				pillData,
 				passes,
@@ -106,23 +103,23 @@ freezer.on('pill:receive', (pill, pass) => {
 	;
 });
 
-freezer.on('pill:save', () => {
-	var state = st(),
-		passes = state.passOrder.map( passId => state.passes[passId] ),
+store.on('pill:save', () => {
+	var passes = store.passOrder.map( passId => store.passes[passId] ),
 		payload = {
-			u: state.auth.u,
-			p: state.auth.p,
-			v: Crypto.encryptPill({passes}, state.auth.k)
+			u: store.auth.u,
+			p: store.auth.p,
+			v: Crypto.encryptPill({passes}, store.auth.k)
 		}
 	;
 
-	st().set({ appStatus: 'SAVING' });
+	store.appStatus = 'SAVING';
+
 	return Ajax.post('/updatePill', payload )
-		.then( pill => freezer.emit('pill:receive', pill) )
+		.then( pill => store.emit('pill:receive', pill) )
 	;
 });
 
-freezer.on('pill:delete', pass => {
+store.on('pill:delete', pass => {
 	console.log('TODO pill:delete');
 });
 
